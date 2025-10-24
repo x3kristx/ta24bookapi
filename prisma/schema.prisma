@@ -1,0 +1,38 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model Book {
+  id          Int      @id @default(autoincrement())
+  title       String
+  author      String
+  thumbnail_url String
+  release_year DateTime
+  authors     AuthorOnBook[]
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+}
+
+model author {
+  id        Int      @id @default(autoincrement())
+  name      String
+  books     AuthorOnBook[]
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model AuthorOnBook {
+  id      Int @id @default(autoincrement())
+  book Book @relation(fields: [bookId], references: [id])
+  bookId Int
+  author author @relation(fields: [authorId], references: [id])
+  authorId Int
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
