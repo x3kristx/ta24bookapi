@@ -1,13 +1,12 @@
-import { Router } from "express";
+import { Router } from 'express';
+import { getAllBooks, getBookById, createBook, updateBook, deleteBook } from '../controllers/books.controllers.js';
 
 const router = Router();
 
-
-
-router.get('/books', ()) => {});
-router.get('/books/:id', ()) => {});
-router.post('/books', ()) => {});
-router.put('/books', ()) => {});
-router.delete('/books', ()) => {});
+router.get('/books', getAllBooks);
+router.get('/books/:id', getBookById);
+router.post('/books', createBook);
+router.put('/books/:id', updateBook);
+router.delete('/books/:id', deleteBook);
 
 export default router;
